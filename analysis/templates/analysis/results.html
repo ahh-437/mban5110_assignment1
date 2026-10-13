@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MBAN 5110 Assignment 1</title>
+<style>
+body {font:16px/1.6 Arial,sans-serif; margin:30px; color:#183247;}
+.table-box {overflow-x:auto; margin-bottom:30px;}
+table {border-collapse:collapse; white-space:nowrap;}
+th,td {padding:8px 12px; border:1px solid #ccd7e0; text-align:right;}
+th {background:#eaf2f7;}
+</style></head><body>
+<h1>MBAN 5110 Assignment 1</h1>
+<p>This page shows my results for Assignment 1. I used the bike sales data to
+forecast demand, estimate product choices, and choose prices and quantities
+within the reserved capacity.</p>
+<h2>Question 1: Demand forecasts</h2>
+<p>I combined sales of all three bikes into two-week periods and fitted OLS
+models for horizons 1 to 4. These results show how well each model fits the
+sample used to estimate it.</p>
+<div class="table-box">{{ q1_table|safe }}</div>
+<h2>Question 2: Bike choice probabilities</h2>
+<p>The prices are $4,200 for Comfort Mountain, $1,950 for Tough Track and $500
+for Ultimate Mountain. The probabilities describe the choice among customers
+who buy a bike; they do not include people who leave without buying.</p>
+<div class="table-box">{{ q2_table|safe }}</div>
+<h2>Question 3: Forecast accuracy</h2>
+<p>I tested the forecasts on 26 later selling periods. MAE and RMSE measure
+forecast errors in bikes. Lower values mean more accurate forecasts.</p>
+<div class="table-box">{{ forecast_table|safe }}</div>
+<h2>Question 3: Product choice accuracy</h2>
+<p>The weighted F1 score measures how well the logistic model predicts the
+purchased bike in the test data. It does not measure the chance that a visitor
+makes a purchase.</p>
+<div class="table-box">{{ choice_table|safe }}</div>
+<h2>Question 3: Capacity, prices and quantities</h2>
+<p>Following the professor's clarification, I set capacity equal to the horizon-4
+forecast, with negative values set to zero and the result rounded to a whole
+bike. I used 56 days to represent two months on the two-week forecasting grid.
+Prices and quantities are chosen 14 days before selling starts, with capacity
+kept fixed and existing orders preserved.</p>
+<p>I selected the plan with the highest modeled revenue from 125 price
+combinations. Costs were not provided, so this is not a profit calculation.
+The main results assume a 50% purchase rate at the reference median prices and
+a price-response value of 2. These values are assumptions, not estimates from
+the purchase data.</p>
+<div class="table-box">{{ q3_table|safe }}</div>
+<h2>Question 3: Using newer sales information</h2>
+<p>I compared plans using the early forecast with plans using the later forecast,
+while keeping capacity and existing orders the same. This shows how newer sales
+information changes the recommended prices or quantities.</p>
+<div class="table-box">{{ update_table|safe }}</div>
+<h2>Question 3: Different purchase assumptions</h2>
+<p>I tested purchase rates of 25%, 50% and 75%, with price-response values of
+1, 2 and 3. The table contains all nine scenarios for each of the 26 test periods,
+giving 234 results. Capacity stays the same across scenarios.</p>
+<div class="table-box">{{ sensitivity_table|safe }}</div>
+<p>The recommendations depend on the assumptions used. Historical sales do not
+prove what customers would buy at the recommended prices or how much revenue
+the store would actually earn. The notebook contains the full analysis and
+discussion of these limitations.</p>
+</body></html>
